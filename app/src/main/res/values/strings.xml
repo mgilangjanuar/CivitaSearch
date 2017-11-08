@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Civita Search</string>
+    <string name="school_name">School Name</string>
+    <string name="submit">Submit</string>
+    <string name="search">Search</string>
+    <string name="cannot_empty">This field cannot be empty</string>
+    <string name="loading">Loading...</string>
+    <string name="empty_result">Empty results</string>
+    <string name="student">Student</string>
+    <string name="lecturer">Lecturer</string>
+    <string name="more">More</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="student_name">Student Name</string>
+    <string name="choose_program">Choose Program</string>
+    <string name="select_all">Select All</string>
+    <string name="lecturer_name">Lecturer Name</string>
+    <string name="about">About</string>
+    <string name="student_detail">Student Detail</string>
+    <string name="lecturer_detail">Lecturer Detail</string>
+</resources>
