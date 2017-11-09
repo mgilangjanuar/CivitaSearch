@@ -39,18 +39,22 @@ public class AboutAdapter extends RecyclerView.Adapter<AboutAdapter.AboutViewHol
     @Override
     public void onBindViewHolder(final AboutViewHolder holder, int position) {
         final ViewContentModel model = list.get(position);
-        holder.title.setText(model.getTitle());
+        if (model.getTitle() == null) {
+            holder.title.setVisibility(TextView.GONE);
+        } else {
+            holder.title.setText(model.getTitle());
+        }
         holder.content.setText(model.getContent());
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if ("Data Resource".equals(model.getTitle())) {
+                if ("Civita Search API".equals(model.getTitle())) {
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.wasisto.com/civitasearch"));
                     holder.itemView.getContext().startActivity(intent);
-                } else if ("Repository".equals(model.getTitle())) {
+                } else if ("GitHub".equals(model.getTitle())) {
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/mgilangjanuar/CivitaSearch"));
                     holder.itemView.getContext().startActivity(intent);
-                } else if ("Rate and Feedback".equals(model.getTitle())) {
+                } else if ("Play Store".equals(model.getTitle())) {
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.mgilangjanuar.dev.civitasearch"));
                     holder.itemView.getContext().startActivity(intent);
                 }
