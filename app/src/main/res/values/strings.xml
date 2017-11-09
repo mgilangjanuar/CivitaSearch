@@ -19,4 +19,5 @@
     <string name="about">About</string>
     <string name="student_detail">Student Detail</string>
     <string name="lecturer_detail">Lecturer Detail</string>
+    <string name="close">Close</string>
 </resources>

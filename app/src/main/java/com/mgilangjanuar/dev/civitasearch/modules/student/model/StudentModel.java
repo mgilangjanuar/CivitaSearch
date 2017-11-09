@@ -106,13 +106,20 @@ public class StudentModel {
 
         private List<Course> courses;
 
-        @Override
-        public String toString() {
+        public String getTerm() {
+            return term;
+        }
+
+        public List<Course> getCourses() {
+            return courses;
+        }
+
+        public String toHtmlString() {
             StringBuilder coursesString = new StringBuilder();
             for (Course course : courses) {
-                coursesString.append("\t" + course.name + " (" + course.code + course.credits + " credits" + ")\n");
+                coursesString.append("<p>&#8226; " + course.name + " (" + course.credits + " credits" + ")</p>");
             }
-            return term + "\n" + coursesString.toString();
+            return coursesString.toString();
         }
 
         private final class Course {

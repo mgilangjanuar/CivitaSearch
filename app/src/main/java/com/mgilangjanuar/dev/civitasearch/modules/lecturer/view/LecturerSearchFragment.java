@@ -43,11 +43,7 @@ public class LecturerSearchFragment extends BaseFragment implements LecturerSear
     @Override
     public void initialize(@Nullable Bundle savedInstanceState) {
         super.initialize(savedInstanceState);
-        String schoolName = ((MainActivity) getActivity()).schoolName;
-        ((MainActivity) getActivity()).getSupportActionBar().setTitle(schoolName);
-
         ((BaseActivity) getActivity()).setupRecyclerView(lecturers);
-
         lecturerSearch.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int keyCode, KeyEvent event) {
@@ -68,13 +64,15 @@ public class LecturerSearchFragment extends BaseFragment implements LecturerSear
     @OnClick(R.id.submit)
     public void onSubmit() {
         ((BaseActivity) getActivity()).hideKeyboard();
-        progressDialog = ((BaseActivity) getActivity()).buildLoadingDialog();
-        progressDialog.show();
+        String lecturer = lecturerSearch.getText().toString().trim();
 
-        if (TextUtils.isEmpty(lecturerSearch.getText())) {
+        if (TextUtils.isEmpty(lecturer)) {
             ((BaseActivity) getActivity()).showSnackbar(getString(R.string.cannot_empty));
         } else {
-            presenter.searchLecturers(((MainActivity) getActivity()).schoolId, lecturerSearch.getText().toString());
+            progressDialog = ((BaseActivity) getActivity()).buildLoadingDialog();
+            progressDialog.show();
+
+            presenter.searchLecturers(((MainActivity) getActivity()).schoolId, lecturer);
         }
     }
 

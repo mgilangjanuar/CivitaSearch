@@ -4,8 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.view.MenuItem;
 
 import com.mgilangjanuar.dev.civitasearch.R;
@@ -14,6 +13,7 @@ import com.mgilangjanuar.dev.civitasearch.modules.about.view.AboutFragment;
 import com.mgilangjanuar.dev.civitasearch.modules.lecturer.view.LecturerSearchFragment;
 import com.mgilangjanuar.dev.civitasearch.modules.student.view.StudentSearchFragment;
 import com.mgilangjanuar.dev.civitasearch.util.BottomNavigationViewUtil;
+import com.mgilangjanuar.dev.civitasearch.util.TabPagerAdapterUtil;
 
 import butterknife.BindView;
 
@@ -24,6 +24,10 @@ public class MainActivity extends BaseActivity {
 
     @BindView(R.id.bottom_navigation)
     BottomNavigationView bottomNavigationView;
+
+    @BindView(R.id.container)
+    ViewPager viewPager;
+
     private MenuItem currentItem;
 
     @Override
@@ -35,6 +39,12 @@ public class MainActivity extends BaseActivity {
         getSupportActionBar().setTitle(schoolName);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        TabPagerAdapterUtil adapterUtil = new TabPagerAdapterUtil(getSupportFragmentManager());
+        adapterUtil.addFragment(StudentSearchFragment.newInstance(), schoolName);
+        adapterUtil.addFragment(LecturerSearchFragment.newInstance(), schoolName);
+        adapterUtil.addFragment(AboutFragment.newInstance(), getString(R.string.more));
+        viewPager.setAdapter(adapterUtil);
 
         BottomNavigationViewUtil.disableShiftMode(bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -52,12 +62,23 @@ public class MainActivity extends BaseActivity {
         } else {
             menuItem = bottomNavigationView.getMenu().getItem(0);
         }
+        selectMenu(menuItem);
 
-        try {
-            selectMenu(menuItem);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                selectMenu(bottomNavigationView.getMenu().getItem(position));
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
     }
 
     @Override
@@ -72,25 +93,23 @@ public class MainActivity extends BaseActivity {
     }
 
     private void selectMenu(MenuItem item) {
-        Fragment fragment = null;
-
         switch (item.getItemId()) {
             case R.id.action_student:
-                fragment = StudentSearchFragment.newInstance();
+                viewPager.setCurrentItem(0);
+                getSupportActionBar().setTitle(schoolName);
                 break;
             case R.id.action_lecturer:
-                fragment = LecturerSearchFragment.newInstance();
+                viewPager.setCurrentItem(1);
+                getSupportActionBar().setTitle(schoolName);
                 break;
             case R.id.action_about:
-                fragment = AboutFragment.newInstance();
+                viewPager.setCurrentItem(2);
+                getSupportActionBar().setTitle(getString(R.string.more));
                 break;
         }
 
         if (currentItem == null || !item.equals(currentItem)) {
             item.setChecked(true);
-            FragmentTransaction beginTransaction = getSupportFragmentManager().beginTransaction();
-            beginTransaction.replace(R.id.container, fragment);
-            beginTransaction.commit();
         }
         currentItem = item;
     }

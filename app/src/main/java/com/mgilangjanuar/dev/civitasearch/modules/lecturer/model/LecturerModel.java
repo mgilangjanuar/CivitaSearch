@@ -139,6 +139,26 @@ public class LecturerModel {
         public String toString() {
             return courseName + " (" + courseCode + ")\n" + term;
         }
+
+        public String getTerm() {
+            return term;
+        }
+
+        public String getCourseCode() {
+            return courseCode;
+        }
+
+        public String getCourseName() {
+            return courseName;
+        }
+
+        public String getClassCode() {
+            return classCode;
+        }
+
+        public String getSchoolName() {
+            return schoolName;
+        }
     }
 
     private class Research {

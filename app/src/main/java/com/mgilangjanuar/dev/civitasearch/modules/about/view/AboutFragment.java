@@ -8,7 +8,6 @@ import com.mgilangjanuar.dev.civitasearch.R;
 import com.mgilangjanuar.dev.civitasearch.base.BaseActivity;
 import com.mgilangjanuar.dev.civitasearch.base.BaseFragment;
 import com.mgilangjanuar.dev.civitasearch.modules.about.presenter.AboutPresenter;
-import com.mgilangjanuar.dev.civitasearch.modules.main.view.MainActivity;
 
 import butterknife.BindView;
 
@@ -27,10 +26,7 @@ public class AboutFragment extends BaseFragment {
     @Override
     public void initialize(@Nullable Bundle savedInstanceState) {
         super.initialize(savedInstanceState);
-        ((MainActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.more));
-
         presenter = new AboutPresenter(getContext());
-
         ((BaseActivity) getActivity()).setupRecyclerView(about);
         about.setAdapter(presenter.buildAdapter());
     }

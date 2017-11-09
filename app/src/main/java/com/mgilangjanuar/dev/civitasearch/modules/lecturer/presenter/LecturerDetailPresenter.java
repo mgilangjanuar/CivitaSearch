@@ -42,13 +42,19 @@ public class LecturerDetailPresenter {
                 list.add(new ViewContentModel("Highest Education", model.getHighestEducation()));
                 list.add(new ViewContentModel("Sex", model.getSex()));
 
-                LecturerModel.LectureHistory lastLectureHistory = model.getLectureHistories().get(model.getLectureHistories().size() - 1);
-                list.add(new ViewContentModel("Last Lecture History", lastLectureHistory.toString()));
-
+                int countEducationHistories = 0;
                 for (LecturerModel.EducationHistory educationHistory : model.getEducationHistories()) {
                     if (educationHistory.getYearGraduated() > 0) {
-                        list.add(new ViewContentModel(educationHistory.getDegree() + " Education Detail", educationHistory.getSchoolName() + "\n" + educationHistory.getYearGraduated()));
+                        countEducationHistories++;
+                        break;
                     }
+                }
+                if (countEducationHistories > 0) {
+                    list.add(new ViewContentModel("Education Histories", "View all education Histories", model.getEducationHistories()));
+                }
+
+                if (!model.getLectureHistories().isEmpty()) {
+                    list.add(new ViewContentModel("Lecture Histories", "View all lecture histories", model.getLectureHistories()));
                 }
 
                 listener.onSuccess(new LecturerDetailAdapter(list));

@@ -55,12 +55,9 @@ public class StudentSearchFragment extends BaseFragment implements ProgramListen
     @Override
     public void initialize(@Nullable Bundle savedInstanceState) {
         super.initialize(savedInstanceState);
-        String schoolName = ((MainActivity) getActivity()).schoolName;
-        ((MainActivity) getActivity()).getSupportActionBar().setTitle(schoolName);
+        presenter = new StudentSearchPresenter(((MainActivity) getActivity()).schoolId, this, this);
 
         ((BaseActivity) getActivity()).setupRecyclerView(students);
-
-        presenter = new StudentSearchPresenter(((MainActivity) getActivity()).schoolId, this, this);
 
         programs.add(getString(R.string.select_all));
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, programs);
@@ -87,20 +84,21 @@ public class StudentSearchFragment extends BaseFragment implements ProgramListen
 
     @OnClick(R.id.submit)
     public void onSubmit() {
+        ((BaseActivity) getActivity()).hideKeyboard();
+        String student = studentSearch.getText().toString().trim();
 
-        if (TextUtils.isEmpty(studentSearch.getText())) {
+        if (TextUtils.isEmpty(student)) {
             ((BaseActivity) getActivity()).showSnackbar(getString(R.string.cannot_empty));
         } else {
             progressDialog = ((BaseActivity) getActivity()).buildLoadingDialog();
             progressDialog.show();
 
             if (getString(R.string.select_all).equals(String.valueOf(programSelect.getSelectedItem()))) {
-                presenter.searchStudents(studentSearch.getText().toString());
+                presenter.searchStudents(student);
             } else {
-                presenter.searchStudentsWithProgram(String.valueOf(programSelect.getSelectedItem()), studentSearch.getText().toString(), programModelList);
+                presenter.searchStudentsWithProgram(String.valueOf(programSelect.getSelectedItem()), student, programModelList);
             }
         }
-        ((BaseActivity) getActivity()).hideKeyboard();
     }
 
     @Override

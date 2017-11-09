@@ -41,17 +41,8 @@ public class StudentDetailPresenter {
                 list.add(new ViewContentModel("School", model.getSchoolName()));
                 list.add(new ViewContentModel("Status", model.getStatus()));
                 list.add(new ViewContentModel("Sex", model.getSex()));
-
-                for (StudentModel.StatusHistory status : model.getStatusHistories()) {
-                    list.add(new ViewContentModel(status.getTerm() + " Status History", status.getStatus() + " - " + status.getCreditsTaken() + " credits"));
-                }
-
-//                StringBuilder courseHistories = new StringBuilder();
-//                for (StudentModel.CourseHistory course: model.getCourseHistories()) {
-//                    courseHistories.append(course + "\n");
-//                }
-//                list.add(new ViewContentModel("Course Histories", courseHistories.toString().trim()));
-
+                list.add(new ViewContentModel("Status Histories", "View all status histories", model.getStatusHistories()));
+                list.add(new ViewContentModel("Course Histories", "View all course histories", model.getCourseHistories()));
                 listener.onSuccess(new StudentDetailAdapter(list));
             }
 

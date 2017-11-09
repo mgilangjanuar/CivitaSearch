@@ -15,6 +15,14 @@ public class SchoolModel {
 
     private String name;
 
+    public SchoolModel() {
+    }
+
+    public SchoolModel(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public String getId() {
         return id;
     }

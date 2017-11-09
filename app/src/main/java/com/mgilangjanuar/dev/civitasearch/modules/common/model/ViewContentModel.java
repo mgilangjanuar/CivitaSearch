@@ -12,9 +12,17 @@ public class ViewContentModel {
 
     private String content;
 
+    private Object additional;
+
     public ViewContentModel(String title, String content) {
         this.title = title;
         this.content = content;
+    }
+
+    public ViewContentModel(String title, String content, Object additional) {
+        this.title = title;
+        this.content = content;
+        this.additional = additional;
     }
 
     public String getTitle() {
@@ -23,5 +31,9 @@ public class ViewContentModel {
 
     public String getContent() {
         return content;
+    }
+
+    public Object getAdditional() {
+        return additional;
     }
 }

@@ -38,6 +38,7 @@ public class SchoolActivity extends BaseActivity implements SearchListener {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setupRecyclerView(schools);
+        schools.setAdapter(presenter.buildInitAdapter());
         schoolSearch.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int keyCode, KeyEvent event) {
@@ -58,13 +59,14 @@ public class SchoolActivity extends BaseActivity implements SearchListener {
     @OnClick(R.id.submit)
     public void onSubmit() {
         hideKeyboard();
-        if (TextUtils.isEmpty(schoolSearch.getText())) {
+        String school = schoolSearch.getText().toString().trim();
+        if (TextUtils.isEmpty(school)) {
             showSnackbar(R.string.cannot_empty);
         } else {
             progressDialog = buildLoadingDialog();
             progressDialog.show();
 
-            presenter.search(schoolSearch.getText().toString());
+            presenter.search(school);
         }
     }
 
