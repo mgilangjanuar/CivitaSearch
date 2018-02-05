@@ -57,7 +57,7 @@ public class LecturerDetailPresenter {
                     list.add(new ViewContentModel("Lecture Histories", "View all lecture histories", model.getLectureHistories()));
                 }
 
-                listener.onSuccess(new LecturerDetailAdapter(list));
+                listener.onSuccess(new LecturerDetailAdapter(list), model.getPhoto());
             }
 
             @Override

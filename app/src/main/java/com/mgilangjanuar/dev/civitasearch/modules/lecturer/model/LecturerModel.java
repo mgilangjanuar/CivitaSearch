@@ -172,10 +172,18 @@ public class LecturerModel {
         private int year;
     }
 
-    private class Photo {
+    public class Photo {
 
         private String type;
 
         private String data;
+
+        public String getType() {
+            return type;
+        }
+
+        public String getData() {
+            return data;
+        }
     }
 }
