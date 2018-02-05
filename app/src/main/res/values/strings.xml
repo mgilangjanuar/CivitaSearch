@@ -20,4 +20,8 @@
     <string name="student_detail">Student Detail</string>
     <string name="lecturer_detail">Lecturer Detail</string>
     <string name="close">Close</string>
+    <string name="student_information">Student Information</string>
+    <string name="lecturer_information">Lecturer Information</string>
+    <string name="additional">Additional</string>
+    <string name="add_new_info">Add New Information</string>
 </resources>

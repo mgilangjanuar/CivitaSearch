@@ -1,6 +1,7 @@
 package com.mgilangjanuar.dev.civitasearch.modules.lecturer.listener;
 
 import com.mgilangjanuar.dev.civitasearch.modules.lecturer.adapter.LecturerDetailAdapter;
+import com.mgilangjanuar.dev.civitasearch.modules.lecturer.model.LecturerModel;
 
 /**
  * Created by mgilangjanuar (mgilangjanuar@gmail.com)
@@ -10,7 +11,7 @@ import com.mgilangjanuar.dev.civitasearch.modules.lecturer.adapter.LecturerDetai
 
 public interface LecturerDetailListener {
 
-    void onSuccess(LecturerDetailAdapter adapter);
+    void onSuccess(LecturerDetailAdapter adapter, LecturerModel.Photo photo);
 
     void onError(String error);
 }
